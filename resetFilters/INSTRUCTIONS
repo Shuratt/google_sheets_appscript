@@ -1,0 +1,21 @@
+/**
+ * Istruzioni per l'utilizzo:
+ * 1. Aprire Google Sheets e andare su "Estensioni" > "Apps Script".
+ * 2. Incollare questo codice nella finestra di script e salvarlo.
+ * 3. Eseguire la funzione `resetFilters` per impostare i valori nel foglio "SheetName".
+ * 
+ * Spiegazione del codice:
+ * - La funzione accede al foglio di lavoro attivo.
+ * - Controlla se esiste un foglio con il nome specificato.
+ * - Se il foglio esiste, imposta i valori delle celle B1, B2 e B3.
+ * 
+ * Modifiche per ottenere risultati diversi:
+ * - Per cambiare il nome del foglio, modificare la variabile `sheetName`.
+ * - Per impostare valori diversi nelle celle, cambiare i parametri di `setValue()`.
+ * - Per aggiornare altre celle, aggiungere più chiamate a `sheet.getRange("<cella>").setValue(<valore>)`.
+ * 
+ * Possibili problemi e soluzioni:
+ * - **Il foglio non esiste:** Verificare che il nome in `sheetName` sia corretto.
+ * - **Errore di autorizzazione:** Assicurarsi di avere i permessi per eseguire script.
+ * - **Celle non aggiornate:** Controllare che il foglio non sia protetto o in sola lettura.
+ */
