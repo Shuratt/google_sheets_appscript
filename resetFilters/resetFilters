@@ -1,0 +1,14 @@
+function resetFilters() {
+  var sheetName = "SheetName";
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName(sheetName);
+  
+  if (!sheet) {
+    Logger.log("Il foglio " + sheetName + " non esiste.");
+    return;
+  }
+  
+  sheet.getRange("B1").setValue(false);
+  sheet.getRange("B2").setValue(true);
+  sheet.getRange("B3").setValue("VALUE");
+}
