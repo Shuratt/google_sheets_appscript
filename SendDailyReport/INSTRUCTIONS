@@ -1,0 +1,81 @@
+# Istruzioni per l'uso della funzione sendDailyReport()
+
+## Descrizione della funzione
+La funzione `sendDailyReport()` preleva i dati da un foglio di calcolo Google Sheets chiamato "Report" e invia un'email con un riepilogo giornaliero dei valori contenuti nell'intervallo di celle `A1:B10`.
+
+## Spiegazione del codice
+
+1. **Accesso al foglio di calcolo:**  
+   ```javascript
+   var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Report");
+   ```
+   La funzione accede al foglio di calcolo attivo e seleziona il foglio denominato "Report".
+
+2. **Lettura dei dati:**  
+   ```javascript
+   var data = sheet.getRange("A1:B10").getValues();
+   ```
+   Ottiene i valori delle celle comprese tra `A1` e `B10`.
+
+3. **Elaborazione dei dati:**  
+   ```javascript
+   var message = "";
+   for (var i = 0; i < data.length; i++) {
+     message += data[i][0] + ": " + data[i][1] + "\n";
+   }
+   ```
+   Scorre i dati riga per riga e costruisce un messaggio in formato testo.
+
+4. **Invio dell'email:**  
+   ```javascript
+   MailApp.sendEmail({
+     to: "tuoemail@example.com",
+     subject: "Riepilogo Giornaliero",
+     body: message
+   });
+   ```
+   Invia l'email all'indirizzo specificato.
+
+## Personalizzazione della funzione
+
+- **Modificare l'intervallo di dati:**
+  Cambiare `getRange("A1:B10")` per selezionare un intervallo differente.
+
+- **Personalizzare il destinatario:**
+  Sostituire `tuoemail@example.com` con l'indirizzo email desiderato.
+
+- **Modificare l'oggetto dell'email:**
+  Cambiare la stringa `"Riepilogo Giornaliero"` nel parametro `subject`.
+
+- **Formattare il messaggio:**
+  Se si desidera un formato HTML, si può usare `htmlBody` invece di `body` in `MailApp.sendEmail()`.
+
+## Possibili problemi e soluzioni
+
+1. **Errore "Cannot read property 'getRange' of null"**  
+   *Causa:* Il foglio "Report" non esiste.  
+   *Soluzione:* Controllare che il nome del foglio sia esattamente "Report".
+
+2. **L'email non viene inviata**  
+   *Causa:* Google potrebbe bloccare l'invio se rileva attività sospette.  
+   *Soluzione:* Verificare che l'indirizzo email sia corretto e che l'account abbia le autorizzazioni per inviare email tramite Google Apps Script.
+
+3. **Dati mancanti o formattazione errata**  
+   *Causa:* Il foglio potrebbe essere vuoto o contenere dati in un formato non previsto.  
+   *Soluzione:* Verificare il contenuto delle celle in `A1:B10`.
+
+## Configurazione del trigger in Google Apps Script
+
+Per eseguire automaticamente la funzione ogni giorno:
+
+1. Aprire il file Google Sheets.
+2. Andare su **Estensioni > Apps Script**.
+3. Incollare la funzione nello script editor.
+4. Salvare lo script.
+5. Andare su **Editor di script > Trigger** (icona orologio).
+6. Cliccare su **Aggiungi un trigger**.
+7. Selezionare `sendDailyReport` come funzione da eseguire.
+8. Impostare l'evento su **Basato sul tempo** e scegliere la frequenza desiderata (es. una volta al giorno).
+9. Salvare il trigger.
+
+Ora la funzione verrà eseguita automaticamente ogni giorno, inviando il riepilogo via email.
