@@ -1,0 +1,26 @@
+/**
+ * Istruzioni per l'utilizzo:
+ * 1. Aprire Google Sheets e accedere con un account Google.
+ * 2. Aprire l'editor di script (Extensions -> Apps Script).
+ * 3. Incollare il codice e salvarlo.
+ * 4. Ricaricare il foglio di calcolo per visualizzare il menu "AZIONI".
+ * 5. Se l'email dell'utente è nella whitelist, sarà visibile il sotto-menu "AZIONI CON WHITELIST".
+ * 
+ * Spiegazione del codice:
+ * - La funzione onOpen() crea il menu "AZIONI" con due sotto-menu: "INVIO MAIL" e, se applicabile, "AZIONI CON WHITELIST".
+ * - Il controllo della whitelist viene effettuato confrontando l'email dell'utente con la lista allowedEmails.
+ * - Le funzioni SendEmailList1(), SendEmailList2() e SendSpecialEmail() registrano l'azione nel Logger (da sostituire con un effettivo invio email).
+ * 
+ * Modifiche possibili:
+ * - Aggiungere nuovi destinatari nella variabile allowedEmails.
+ * - Personalizzare le funzioni di invio email per effettivamente inviare messaggi.
+ * - Aggiungere nuove voci al menu secondo necessità.
+ * 
+ * Possibili problemi e soluzioni:
+ * 1. Il menu non appare dopo il salvataggio del codice.
+ *    - Soluzione: Ricaricare il foglio di calcolo.
+ * 2. Il menu "AZIONI CON WHITELIST" non è visibile.
+ *    - Soluzione: Verificare che l'email dell'utente sia presente in allowedEmails.
+ * 3. Il codice non invia email.
+ *    - Soluzione: Sostituire Logger.log() con il metodo MailApp.sendEmail() fornendo i parametri corretti.
+ */
