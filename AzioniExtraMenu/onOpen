@@ -1,0 +1,38 @@
+function onOpen() {
+  var ui = SpreadsheetApp.getUi();
+  var menu = ui.createMenu("AZIONI");
+  
+  // Sottomenù "INVIO MAIL"
+  var sendMailMenu = ui.createMenu("INVIO MAIL")
+    .addItem("Lista di destinatari 1", "SendEmailList1")
+    .addItem("Lista di destinatari 2", "SendEmailList2");
+  
+  menu.addSubMenu(sendMailMenu);
+  
+  // Controllo whitelist per "AZIONI CON WHITELIST"
+  var allowedEmails = ["utente1@example.com", "gruppo@example.com"]; // Modifica con gli indirizzi corretti
+  var userEmail = Session.getActiveUser().getEmail();
+  
+  if (allowedEmails.includes(userEmail)) {
+    var whitelistMenu = ui.createMenu("AZIONI CON WHITELIST")
+      .addItem("Invio mail speciale", "SendSpecialEmail");
+    menu.addSubMenu(whitelistMenu);
+  }
+  
+  menu.addToUi();
+}
+
+function SendEmailList1() {
+  // Implementazione dell'invio email per Lista 1
+  Logger.log("Invio email a Lista 1");
+}
+
+function SendEmailList2() {
+  // Implementazione dell'invio email per Lista 2
+  Logger.log("Invio email a Lista 2");
+}
+
+function SendSpecialEmail() {
+  // Implementazione dell'invio speciale
+  Logger.log("Invio mail speciale");
+}
