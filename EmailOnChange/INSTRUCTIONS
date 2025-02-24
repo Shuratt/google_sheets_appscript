@@ -1,0 +1,106 @@
+### INVIARE UNA MAIL QUANDO UN VALORE CAMBIA ###
+# Questa funzione invia un'email di notifica quando un determinato valore cambia nel foglio di calcolo #
+
+### A COSA SERVE? ###
+# Utilità: Monitorare scadenze, ordini, stock, pagamenti ecc. #
+# Attivazione: Impostare questo script nel trigger onEdit(e). #
+
+### GUIDA E ISTRUZIONI UTILI ###
+function sendEmailOnChange(e) {
+Questa riga definisce una funzione chiamata sendEmailOnChange, che accetta un parametro e.
+e è un oggetto evento che viene passato automaticamente da Google Apps Script quando un trigger di modifica (onEdit) viene attivato.
+Suggerimento: Se vuoi attivare la funzione solo su determinate modifiche, puoi filtrare l'evento in base al nome del foglio o alla cella modificata.
+
+  var sheet = e.source.getActiveSheet();
+e.source si riferisce al file di Google Sheets in cui è avvenuta la modifica.
+.getActiveSheet() restituisce il foglio in cui è stata effettuata la modifica.
+Suggerimento: Se vuoi che la funzione si attivi solo su un foglio specifico, puoi aggiungere un controllo come:
+if (sheet.getName() !== "Foglio1") return;
+
+  var range = e.range;
+e.range rappresenta l'intervallo (cella o celle) che è stato modificato.
+
+  var value = range.getValue();
+range.getValue() ottiene il valore attuale della cella modificata.
+Suggerimento: Se vuoi eseguire l'azione solo su numeri o stringhe specifiche, puoi modificare questa parte. Ad esempio:
+
+if (typeof value === "number" && value > 100) { 
+Questo eseguirà l'azione solo se il valore è un numero maggiore di 100.
+
+  if (value === "ALERT") { 
+Questo controllo verifica se il valore appena inserito è esattamente "ALERT".
+Suggerimento: Se vuoi attivare la funzione per più parole chiave, puoi usare un array e il metodo .includes():
+
+if (["ALERT", "WARNING", "DANGER"].includes(value)) { 
+Così l'email verrà inviata anche per "WARNING" e "DANGER".
+
+    MailApp.sendEmail({
+MailApp.sendEmail() è la funzione di Google Apps Script per inviare email.
+
+      to: "tuoemail@example.com",
+Definisce l'indirizzo email del destinatario.
+Suggerimento: Per inviare l'email a più destinatari, separali con una virgola:
+
+to: "email1@example.com,email2@example.com",
+
+      subject: "Attenzione: valore cambiato!",
+Definisce l'oggetto dell'email.
+Suggerimento: Puoi personalizzarlo aggiungendo il valore modificato:
+
+subject: "Modifica rilevata: " + value,
+
+      body: "Il valore nella cella " + range.getA1Notation() + " è stato modificato in ALERT."
+range.getA1Notation() restituisce la posizione della cella in formato A1 (es. "B3").
+Suggerimento: Se vuoi includere anche il vecchio valore prima della modifica, usa e.oldValue (non sempre disponibile):
+
+body: "La cella " + range.getA1Notation() + " è stata modificata. Vecchio valore: " + e.oldValue + ", Nuovo valore: " + value,
+
+Modifica per più funzionalità
+Se vuoi che la funzione controlli anche i numeri sopra una certa soglia, puoi modificarla così:
+
+  if (value === "ALERT" || (typeof value === "number" && value > 50)) { 
+Ora l'email verrà inviata se il valore è "ALERT" oppure se è un numero maggiore di 50.
+
+### POSSIBILI PROBLEMI ###
+Si attiva su qualsiasi modifica
+Problema: La funzione si esegue su ogni modifica nel foglio.
+Soluzione: Filtrare per foglio e colonna specifica:
+if (sheet.getName() !== "Foglio1" || range.getColumn() !== 2) return;
+
+Non tiene conto del valore precedente
+Problema: Non verifica se il valore era già "ALERT".
+Soluzione: Usare e.oldValue (può non essere sempre disponibile).
+
+Non invia email a più destinatari
+Problema: L'email viene inviata solo a un indirizzo.
+Soluzione: Separare più email con una virgola:
+to: "email1@example.com,email2@example.com",
+
+Limite di email giornaliere superato
+Problema: Google limita l’invio di email (fino a 100 al giorno per utenti normali).
+Soluzione: Registrare gli avvisi in un foglio di lavoro invece di inviare email per ogni modifica.
+
+Non si attiva sugli script di modifica automatica
+Problema: onEdit(e) funziona solo per modifiche manuali.
+Soluzione: Usare un trigger basato su tempo (Time-driven trigger).
+
+### COME CONFIGURARE IL TRIGGER SU APPSCRIPT ###
+Per utilizzare la funzione sendEmailOnChange(e) in Google Apps Script, devi configurare un trigger installabile perché la funzione MailApp.sendEmail() non può essere eseguita da un trigger semplice (onEdit).
+
+Passaggi per configurare il trigger:
+1.Apri Google Apps Script
+2.In Google Sheets, vai su Estensioni → Apps Script.
+3.Aggiungi la funzione
+4.Assicurati che sendEmailOnChange(e) sia salvata nel file di script.
+5.Configura il trigger
+6.Vai su Trigger (icona a forma di orologio).
+7.Clicca su + Aggiungi Trigger (in basso a destra).
+
+Configura così:
+-Scegli la funzione da eseguire → sendEmailOnChange
+-Scegli l'origine dell'evento → Dalla modifica del foglio di lavoro
+-Scegli il tipo di evento → Modifica
+-Scegli il foglio specifico (opzionale)
+-Salva e autorizza lo script
+
+Quando richiesto, autorizza l'accesso all'account Google.
