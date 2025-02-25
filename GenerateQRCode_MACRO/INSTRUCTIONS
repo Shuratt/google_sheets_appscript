@@ -1,0 +1,12 @@
+Generazione di Codici QR per URL
+Obiettivo: Creare automaticamente un codice QR per ogni link inserito in una colonna, in modo che possa essere scansionato direttamente con uno smartphone.
+
+Scenario d’uso
+Un foglio con un elenco di link a documenti, siti web o risorse digitali.
+Un registro di eventi con QR code per registrare la presenza dei partecipanti.
+Creazione di biglietti da visita digitali con QR code per aprire automaticamente una pagina web.
+
+Come funziona
+L'utente inserisce un link nella colonna A.
+La macro genera automaticamente un QR code e lo visualizza nella colonna B accanto al link.
+Utilizza il servizio di Google per creare il QR Code.
