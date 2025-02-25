@@ -1,0 +1,17 @@
+function highlightRecentEdits() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var range = sheet.getDataRange();
+  var values = range.getValues();
+  var lastEdit = sheet.getLastUpdated();
+  var now = new Date();
+
+  for (var i = 0; i < values.length; i++) {
+    for (var j = 0; j < values[i].length; j++) {
+      var cell = sheet.getRange(i + 1, j + 1);
+      var cellValue = cell.getValue();
+      if (cell.getLastUpdated() && now - cell.getLastUpdated() < 24 * 60 * 60 * 1000) {
+        cell.setBackground("#ffff00"); // Giallo
+      }
+    }
+  }
+}
