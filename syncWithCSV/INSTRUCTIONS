@@ -1,0 +1,56 @@
+Sincronizzazione Automatica con un File CSV su Google Drive
+Questa macro permette di importare automaticamente i dati da un file CSV salvato su Google Drive e di aggiornarli nel foglio di Google Sheets ogni volta che il file viene modificato.
+È utile per chi lavora con dati provenienti da sistemi esterni, come esportazioni di database, report aziendali o listini prezzi aggiornati periodicamente.
+
+Funzionalità principali:
+-Trova il file CSV più recente all'interno di una cartella su Google Drive.
+-Legge il contenuto del file e lo importa in Google Sheets.
+-Sostituisce i dati esistenti con quelli nuovi.
+-Supporta file CSV con separatori di virgola o punto e virgola.
+
+Requisiti per un corretto funzionamento
+-Cartella specifica su Google Drive: devi avere una cartella dedicata per contenere il file CSV.
+-ID della cartella: devi inserire l’ID della cartella in var folderId = "FOLDER_ID";. Lo trovi nell'URL della cartella su Google Drive.
+-File CSV con struttura coerente: il file deve avere sempre lo stesso formato (stesso numero di colonne).
+-Permessi: lo script deve avere accesso ai file di Google Drive e Google Sheets. La prima esecuzione chiederà le autorizzazioni.
+
+Miglioramenti e funzionalità aggiuntive
+Aggiornamento automatico ogni giorno:
+Possiamo impostare uno script trigger per eseguire l'importazione automaticamente a intervalli regolari.
+
+Passaggi:
+-Apri Editor di script in Google Sheets.
+-Vai su Editor di trigger (icona dell'orologio ⏰).
+-Aggiungi un trigger per eseguire syncWithCSV() ogni giorno o ogni ora.
+
+Mantenere un backup del vecchio dataset:
+Per non perdere i dati precedenti, possiamo salvarli in un nuovo foglio prima di sostituirli.
+
+Funzione addizionale:
+function backupAndSyncCSV() {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var backupSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Backup") || SpreadsheetApp.getActiveSpreadsheet().insertSheet("Backup");
+  
+  // Copia i dati esistenti in "Backup"
+  var lastRow = sheet.getLastRow();
+  var lastColumn = sheet.getLastColumn();
+  if (lastRow > 0 && lastColumn > 0) {
+    var range = sheet.getRange(1, 1, lastRow, lastColumn);
+    var backupRange = backupSheet.getRange(backupSheet.getLastRow() + 1, 1, lastRow, lastColumn);
+    backupRange.setValues(range.getValues());
+  }
+  
+  syncWithCSV(); // Esegue l'importazione dopo il backup
+}
+
+Aggiungere il timestamp dell’ultimo aggiornamento:
+Possiamo scrivere la data e l’ora dell’ultimo aggiornamento in una cella del foglio.
+
+Modifica la funzione con:
+sheet.getRange("A1").setValue("Ultimo aggiornamento: " + new Date());
+
+Possibili problemi e soluzioni:
+Lo script non trova file CSV	-> La cartella è vuota o l’ID è sbagliato	-> Controlla l’ID della cartella e assicurati che ci sia almeno un file CSV
+I dati non vengono aggiornati	-> Lo script non viene eseguito automaticamente	-> Imposta un trigger per l’aggiornamento automatico
+I dati importati sono disordinati	-> Separatore errato nel CSV	-> Modifica la riga var delimiter = csvContent.includes(";") ? ";" : ",";
+Autorizzazione negata	-> Google blocca l’accesso ai file	-> Vai su Google Apps Script Dashboard, rimuovi le autorizzazioni e riavvia lo script
