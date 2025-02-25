@@ -1,0 +1,10 @@
+function onEdit(e) {
+  var sheet = e.source.getActiveSheet();
+  var range = e.range;
+  var columnToWatch = 1; // Monitoriamo la colonna A (1° colonna)
+  var columnToUpdate = 2; // Scriviamo la data nella colonna B (2° colonna)
+
+  if (range.getColumn() == columnToWatch) {
+    sheet.getRange(range.getRow(), columnToUpdate).setValue(new Date());
+  }
+}
