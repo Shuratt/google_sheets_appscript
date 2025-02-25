@@ -1,0 +1,21 @@
+DESCRIZIONE
+Questo codice è uno script di Google Apps Script che aggiunge un menu personalizzato a Google Sheets quando il documento viene aperto. Il menu include un'opzione chiamata "Show alert" che, quando selezionata, mostra un messaggio di conferma con i pulsanti "Yes" e "No". Se l'utente preme "Yes", viene mostrato un altro messaggio di conferma, altrimenti viene visualizzato un messaggio di diniego.
+
+MODIFICHE
+Modificare il testo dell'alert – Cambiare il messaggio visualizzato per adattarlo a un contesto specifico.
+Aggiungere più opzioni nel menu – Ad esempio, un'opzione per inserire automaticamente dati nel foglio di lavoro.
+Modificare il comportamento della risposta – Ad esempio, invece di un semplice messaggio di conferma, eseguire un'azione specifica se l'utente preme "Yes".
+
+EVOLUZIONE
+Scrivere nel foglio di lavoro – Se l'utente conferma, registrare la scelta in una cella specifica.
+Inviare una email di notifica – Se l'utente preme "Yes", inviare una notifica via email.
+Interfaccia più interattiva – Utilizzare una finestra di dialogo personalizzata per raccogliere input dall'utente.
+Gestione multiutente – Salvare le risposte degli utenti in un log per tracciarle.
+
+PROBLEMI
+Errore di sintassi nella chiamata dell'alert – La virgola dopo ui.ButtonSet.YES_NO va rimossa.
+Soluzione: Rimuovere la virgola alla fine di questa riga.
+Limitazione dell'esecuzione automatica – Il menu viene creato solo quando l'utente apre il documento, quindi non è immediatamente disponibile in un nuovo file.
+Soluzione: Informare gli utenti di ricaricare la pagina se il menu non appare.
+Mancanza di gestione degli errori – Se il codice incontra un problema, l'utente non riceve feedback.
+Soluzione: Aggiungere blocchi try...catch per catturare e gestire errori.
