@@ -1,0 +1,21 @@
+DESCRIZIONE
+Questo codice Google Apps Script aggiunge un menu personalizzato chiamato "Custom Menu" a Google Sheets quando il documento viene aperto. Il menu contiene un'opzione "Show prompt" che, quando selezionata, mostra una finestra di dialogo in cui l'utente può inserire il proprio nome. A seconda dell'azione dell'utente (OK, Cancel o chiusura della finestra), viene visualizzato un messaggio diverso.
+
+MODIFICHE
+Cambiare il testo del prompt – Personalizzare il messaggio per un altro tipo di input (ad esempio, chiedere un numero di telefono o un feedback).
+Aggiungere più opzioni al menu – Inserire altre voci per raccogliere diversi tipi di dati.
+Validare l'input dell'utente – Controllare che l'utente abbia inserito un valore valido (ad esempio, non consentire campi vuoti).
+
+EVOLUZIONE
+Salvare l'input nel foglio di lavoro – Registrare il nome inserito in una cella specifica.
+Utilizzare il nome in altre funzioni – Personalizzare ulteriori interazioni con l'utente in base al nome inserito.
+Inviare una email di benvenuto – Se l'utente inserisce il nome, inviare un'email di conferma o di benvenuto.
+Creare una lista di nomi inseriti – Memorizzare tutti i nomi forniti dagli utenti per future elaborazioni.
+
+PROBLEMI
+Errore di sintassi nella chiamata del prompt – La virgola dopo ui.ButtonSet.OK_CANCEL non è necessaria.
+Soluzione: Rimuovere la virgola alla fine della riga.
+Mancanza di gestione degli input vuoti – Se l'utente preme "OK" senza inserire nulla, il codice mostra "Your name is ." senza alcun valore.
+Soluzione: Aggiungere un controllo per verificare che il testo non sia vuoto prima di mostrare l'alert.
+Assenza di log degli input – Le informazioni inserite non vengono memorizzate e si perdono dopo la chiusura della finestra.
+Soluzione: Salvare il valore in una variabile globale o in una cella del foglio.
