@@ -1,0 +1,21 @@
+DESCRIZIONE
+Questo codice Google Apps Script crea un menu personalizzato chiamato "Custom Menu" all'apertura del file Google Sheets. Il menu include un'opzione "Show dialog" che, quando selezionata, apre una finestra di dialogo modale con un contenuto HTML personalizzato proveniente da un file chiamato "Page".
+
+MODIFICHE
+Cambiare le dimensioni della finestra di dialogo – Regolare larghezza e altezza per adattare il contenuto.
+Modificare il titolo della finestra – Sostituire 'My custom dialog' con un nome più descrittivo.
+Caricare un altro file HTML – Usare un diverso file HTML per visualizzare contenuti differenti.
+
+EVOLUZIONE
+Aggiungere un modulo nel dialogo – Creare un modulo HTML con campi di input e inviare i dati a Google Sheets.
+Interazione bidirezionale – Passare dati dal foglio alla finestra di dialogo e viceversa tramite Google Apps Script.
+Integrazione con API esterne – Usare il dialogo per raccogliere informazioni e inviarle a servizi esterni.
+Personalizzazione grafica avanzata – Aggiungere CSS e JavaScript per migliorare l'interfaccia utente.
+
+PROBLEMI
+Il file "Page" deve esistere – Se il file HTML non è stato creato, il codice darà errore.
+Soluzione: Creare un file "Page.html" nella sezione Script Editor.
+Il dialogo è solo modale – L'utente non può interagire con il foglio mentre la finestra è aperta.
+Soluzione: Se necessario, usare showSidebar() invece di showModalDialog().
+Mancanza di gestione degli eventi nel dialogo – Il codice non prevede azioni sui dati inseriti.
+Soluzione: Aggiungere uno script client-side per raccogliere input e inviarli a Google Sheets.
