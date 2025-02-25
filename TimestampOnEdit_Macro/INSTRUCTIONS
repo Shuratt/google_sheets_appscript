@@ -1,0 +1,13 @@
+Aggiunta Automatica di Timestamp
+Obiettivo: Ogni volta che un utente modifica una cella in una determinata colonna (ad esempio la colonna A), la macro registra automaticamente la data e l'ora della modifica in una colonna accanto (colonna B).
+
+Scenario d’uso
+Un foglio di lavoro dove gli utenti aggiornano lo stato di un'attività (ad esempio "In corso", "Completato") e si vuole registrare quando è stata fatta l’ultima modifica.
+Un registro delle presenze in cui ogni volta che si aggiorna un nome, viene registrata automaticamente la data di modifica.
+
+Come funziona
+La macro si attiva automaticamente ogni volta che qualcuno modifica una cella nella colonna A.
+Scrive la data e l’ora attuale nella colonna B sulla stessa riga.
+
+Nota
+Questo script deve essere incollato in Editor di script → Trigger del progetto → Attiva su modifica (onEdit)
