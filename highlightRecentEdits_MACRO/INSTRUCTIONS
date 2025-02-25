@@ -1,0 +1,4 @@
+Evidenzia Automatica delle Celle più Recentemente Modificate
+Google Sheets non offre un modo per vedere subito le ultime modifiche. Questa macro colora le celle modificate nelle ultime 24 ore.
+
+Perché è utile? Permette di vedere a colpo d’occhio le modifiche recenti, cosa che Google Sheets non fa nativamente.
