@@ -1,0 +1,32 @@
+function syncWithCSV() {
+  var folderId = "FOLDER_ID"; // Inserire ID della cartella su Google Drive
+  var folder = DriveApp.getFolderById(folderId);
+  var files = folder.getFilesByType(MimeType.CSV);
+  
+  var latestFile = null;
+  var latestDate = 0;
+
+  // Trova il file CSV più recente nella cartella
+  while (files.hasNext()) {
+    var file = files.next();
+    if (file.getLastUpdated().getTime() > latestDate) {
+      latestFile = file;
+      latestDate = file.getLastUpdated().getTime();
+    }
+  }
+  
+  if (!latestFile) {
+    Logger.log("Nessun file CSV trovato.");
+    return;
+  }
+  
+  var csvContent = latestFile.getBlob().getDataAsString();
+  var delimiter = csvContent.includes(";") ? ";" : ","; // Identifica il separatore
+  var rows = Utilities.parseCsv(csvContent, delimiter);
+  
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  sheet.clear(); // Cancella il contenuto precedente
+  sheet.getRange(1, 1, rows.length, rows[0].length).setValues(rows);
+
+  Logger.log("Dati aggiornati con successo da: " + latestFile.getName());
+}
