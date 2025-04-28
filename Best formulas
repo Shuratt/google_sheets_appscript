@@ -1,0 +1,72 @@
+1. VLOOKUP() - Cerca un valore in una colonna
+=VLOOKUP(1001, A2:B10, 2, FALSE)
+
+Cerca il valore "1001" nella colonna A e restituisce il valore corrispondente nella colonna B.
+
+2. INDEX() + MATCH() - Ricerca più flessibile
+=INDEX(B2:B10, MATCH(1001, A2:A10, 0))
+
+Restituisce il valore nella colonna B corrispondente a "1001" nella colonna A.
+
+3. FILTER() - Filtrare dati in base a criteri
+=FILTER(A2:C20, B2:B20="Italia")
+
+Estrae solo le righe in cui la colonna B contiene "Italia".
+
+4. IMPORTRANGE() - Importare dati da un altro foglio
+=IMPORTRANGE("https://docs.google.com/spreadsheets/d/ID_del_foglio", "Foglio1!A1:B10")
+
+Importa il range A1:B10 da un altro foglio Google.
+
+5. IMPORTHTML() - Estrarre tabelle o liste da una pagina web
+=IMPORTHTML("https://example.com", "table", 1)
+
+Importa la prima tabella dalla pagina web.
+
+6. QUERY() - Filtrare dati con una sintassi SQL-like
+=QUERY(A2:C20, "SELECT A, B WHERE C='Italia'")
+
+Seleziona le colonne A e B dalle righe in cui la colonna C contiene "Italia".
+
+7. UNIQUE() - Estrarre valori unici
+=UNIQUE(A2:A20)
+
+Restituisce i valori unici della colonna A.
+
+8. SUBTOTAL() - Calcolare dati ignorando righe nascoste
+=SUBTOTAL(9, A2:A20)
+
+Calcola la somma dei valori in A2:A20, escludendo le righe nascoste o filtrate a differenza di COUNTA che non le ignora.
+
+9. SORT() - Ordinare i dati
+=SORT(A2:B20, 2, TRUE)
+
+Ordina l'intervallo in base alla colonna B in ordine crescente.
+
+10. FIND() - Cercare un testo all'interno di una stringa
+=FIND("Google", A2)
+
+Trova la posizione della parola "Google" nella cella A2.
+
+11. LEFT(), MID(), RIGHT() - Estrarre parti di testo
+=LEFT(A2, 5)  // Prende i primi 5 caratteri
+=MID(A2, 3, 4)  // Prende 4 caratteri a partire dal terzo
+=RIGHT(A2, 6)  // Prende gli ultimi 6 caratteri
+
+Permettono di estrarre porzioni di testo dalle celle.
+
+12. SPLIT() - Dividere il contenuto di una cella
+=SPLIT(A2, ", ")
+
+Divide il testo nella cella A2 utilizzando la virgola e lo spazio come separatori.
+
+13. CONCATENATE() - Unire più celle
+=CONCATENATE(A2, " ", B2)
+
+Concatena il contenuto delle celle A2 e B2 con uno spazio tra loro.
+
+14. REGEXEXTRACT() - Estrae un testo usando espressioni regolari
+=REGEXEXTRACT(A2, "\d+") // Estrae solo i numeri presenti nella cella A2.
+=REGEXEXTRACT(A2, "[A-Za-z]+") // Estrarre lettere da una stringa
+=REGEXEXTRACT(A2, "^\w+") // Estrarre la prima parola di una stringa
+=REGEXEXTRACT(A2, "\w+$") // Estrarre l’ultima parola di una stringa
