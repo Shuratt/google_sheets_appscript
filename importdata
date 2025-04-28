@@ -1,0 +1,17 @@
+function importdata() {
+  var sourceSpreadsheetId = "1rBm3CUV6QcwF9R41kc1XT9IiChcrzYDgGJ8nBgt39PA"; // Scrivi l'ID del foglio dove sono i dati da importare
+  var sourceRange = "Dati!A:Z"; // Scrivi il nome del tab e l'intervallo con i dati da importare
+  var destinationSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("dati_test"); // Scrivi il nome del tab di destinazione dove verranno scritti i dati importati
+  
+  var sourceSpreadsheet = SpreadsheetApp.openById(sourceSpreadsheetId);
+  var sourceSheet = sourceSpreadsheet.getSheetByName("Dati"); // Scrivi solo il nome del tab del foglio con i dati da importare
+  var data = sourceSheet.getRange(sourceRange).getValues();
+  
+  destinationSheet.getRange(1, 1, data.length, data[0].length).setValues(data);
+}
+
+// Questa funzione permette di importare fino a 5,38 milioni di valori, pari a circa 206923 righe per A:Z colonne
+// La funzione in sè non ha nessun limite di dati per l'importazione, il suo limite è solo legato alla velocità di esecuzione di massimo 30 minuti. Dopo 30 minuti l'esecuzione si interrompe.
+// Per importare più di 5,38 milioni di valori dividere il range da importare in più funzioni da eseguire in successione ma non all'interno della stessa esecuzione.
+// Consigliata la schedulazione della funzione
+// I dati saranno importati man mano che la funzione li raccoglie al netto del buffering, memoria del client e connettività.
