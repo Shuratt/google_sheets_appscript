@@ -20,3 +20,10 @@ Considerazioni
 - IFERROR garantisce che, in caso di errore, la formula restituisca un valore predefinito (una stringa vuota ""), evitando messaggi di errore visibili nel foglio.
 - Se il filtro non trova corrispondenze, anziché restituire un errore, la cella sarà vuota.
 Ti serve un adattamento della formula o suggerimenti per ottimizzarla?
+
+Il * corrisponde all'operatore AND, quindi entrambe le condizioni devono essere vere affinché il filtro funzioni. 
+Il + invece rappresenta OR, quindi basta che una delle due condizioni sia vera perché il valore venga incluso nel filtro.
+
+Esempio
+ =FILTER(range, condition1 * condition2)
+ =FILTER(range, condition1 + condition2)
