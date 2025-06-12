@@ -1,0 +1,22 @@
+=IFERROR(FILTER(scarneg_tot_picking!M$1:M;(scarneg_tot_picking!G$1:G=Template!H2)*(scarneg_tot_picking!A$1:A="PERC"));"")
+
+Questa formula utilizza FILTER per estrarre dati dalla colonna M del foglio scarneg_tot_picking, basandosi su due condizioni:
+- scarneg_tot_picking!G$1:G deve corrispondere al valore presente in Template!H2.
+- scarneg_tot_picking!A$1:A deve contenere il valore "PERC".
+Se il filtro non restituisce alcun risultato o genera un errore, allora IFERROR interviene per sostituire l'errore con una stringa vuota ("").
+In sintesi, questa formula cerca di estrarre dalla colonna M solo i valori che soddisfano entrambe le condizioni, evitando errori che potrebbero verificarsi se nessun dato corrisponde ai criteri.
+
+Suddivisione della sintassi
+- FILTER(range, condition1 * condition2)
+- range: scarneg_tot_picking!M$1:M → Estrae i dati dalla colonna M del foglio scarneg_tot_picking.
+- condition1: scarneg_tot_picking!G$1:G=Template!H2 → Confronta i valori nella colonna G con il valore di Template!H2.
+- condition2: scarneg_tot_picking!A$1:A="PERC" → Filtra solo le righe dove la colonna A contiene "PERC".
+- L'uso di * tra le condizioni crea un filtro AND, cioè entrambe devono essere vere affinché il dato venga incluso.
+- IFERROR(expression, alternative_value)
+- expression: Il risultato di FILTER().
+- alternative_value: "" → Se la funzione FILTER() genera un errore, viene restituita una stringa vuota.
+Considerazioni
+- L'uso del * tra le condizioni è corretto ed è equivalente a un AND logico.
+- IFERROR garantisce che, in caso di errore, la formula restituisca un valore predefinito (una stringa vuota ""), evitando messaggi di errore visibili nel foglio.
+- Se il filtro non trova corrispondenze, anziché restituire un errore, la cella sarà vuota.
+Ti serve un adattamento della formula o suggerimenti per ottimizzarla?
