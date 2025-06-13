@@ -1,0 +1,33 @@
+Limiti di righe, celle e valori
+Google Sheets ha alcuni limiti tecnici che possono influenzare la gestione dei dati:
+- Numero massimo di celle per foglio: 10 milioni di celle. (equivale a 26 colonne (alfabeto inglese) * 384,615 righe)
+- Numero massimo di colonne: 18.278 colonne per foglio. (Se proprio ci si vuole male o si sbaglia incollanto/eseguendo un traspose di righe in colonne)
+- Numero massimo di righe: Dipende dal numero di colonne, poiché il limite totale è di 10 milioni di celle. (vedi sopra)
+
+Limiti delle formule di IMPORT
+Le formule di importazione, come IMPORTRANGE, IMPORTDATA, IMPORTXML e IMPORTHTML, hanno alcune restrizioni:
+- IMPORTRANGE: Può essere soggetto a limiti di connessione tra fogli e può rallentare se utilizzato su grandi quantità di dati. (Nello specifico 50.000 celle che equivalgono a 26 colonne * 1.923 righe)
+- IMPORTDATA: Può avere problemi di aggiornamento se il file sorgente è troppo grande.
+- IMPORTXML e IMPORTHTML: Possono essere limitati dalla frequenza di aggiornamento e dalla disponibilità dei dati online.
+
+Configurazioni che impattano sulle performance
+Per migliorare le prestazioni di Google Sheets, considera questi aspetti:
+- Evitare formule volatili: Funzioni come NOW(), TODAY() e RAND() si aggiornano continuamente e possono rallentare il foglio.
+- Ridurre l'uso di IMPORTRANGE: Se possibile, importa solo dati aggregati invece di grandi quantità di righe.
+- Limitare la formattazione condizionale: Troppe regole di formattazione possono rallentare il caricamento e l'elaborazione.
+- Ottimizzare le funzioni di ricerca: VLOOKUP e MATCH funzionano meglio con intervalli semplici e colonne helper.
+- Evitare query nidificate: Troppe QUERY() su dati derivati possono causare rallentamenti.
+
+Cosa sono le colonne helper?
+Le colonne helper sono colonne aggiuntive utilizzate per semplificare formule e migliorare l'efficienza dei calcoli. Alcuni esempi di utilizzo:
+- Concatenazione di dati: Se hai nomi separati in due colonne (Nome e Cognome), puoi creare una colonna helper con =A2 & " " & B2 per facilitare ricerche con VLOOKUP.
+- Indice numerico per ordinamenti: Se hai una lista di dati e vuoi poterli riordinare facilmente, puoi aggiungere una colonna helper con numeri progressivi.
+- Ottimizzazione di VLOOKUP: VLOOKUP funziona meglio se la colonna di ricerca è la prima dell'intervallo. Se non lo è, puoi creare una colonna helper che riorganizza i dati.
+
+Funzioni di ricerca più efficienti
+Le funzioni di ricerca in Google Sheets possono variare in efficienza a seconda del contesto:
+- INDEX + MATCH: Più veloce di VLOOKUP, perché MATCH trova la posizione e INDEX restituisce il valore.
+- FILTER: Utile per estrarre dati dinamicamente senza dover usare VLOOKUP.
+- QUERY: Ideale per grandi dataset, permette di filtrare e ordinare i dati con sintassi SQL.
+- XLOOKUP (se disponibile): Alternativa moderna a VLOOKUP, più flessibile e senza limitazioni sulla posizione della colonna di ricerca.
+- SEARCH e FIND: Utili per trovare stringhe di testo all'interno di celle.
